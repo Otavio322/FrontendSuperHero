@@ -12,7 +12,7 @@ botao.addEventListener("click", async () => {
     raca: document.getElementById("racaHeroi").value,
     tipo: document.getElementById("tipoHeroi").value
   };
-  await fetch("http://localhost:3000/heroes", {
+  await fetch("https://backendsuperhero.onrender.com", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(hero)
@@ -21,7 +21,7 @@ botao.addEventListener("click", async () => {
 });
 
 async function loadHeroes() {
-  const res = await fetch("http://localhost:3000/heroes");
+  const res = await fetch("https://backendsuperhero.onrender.com");
   const heroes = await res.json();
 
   heroesList.innerHTML = "";
@@ -32,7 +32,7 @@ async function loadHeroes() {
     const deleteBtn = document.createElement("button");
     deleteBtn.textContent = "Delete";
     deleteBtn.onclick = async () => {
-      await fetch(`http://localhost:3000/heroes/${h._id}`, {
+      await fetch(`https://backendsuperhero.onrender.com/${h._id}`, {
         method: "DELETE"
       });
       loadHeroes();
@@ -58,7 +58,7 @@ async function loadHeroes() {
      loadHeroes();
      });  
 
-      await fetch(`http://localhost:3000/heroes/${h._id}`, {
+      await fetch(`https://backendsuperhero.onrender.com/${h._id}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(updatedHero)
