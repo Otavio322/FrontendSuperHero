@@ -2,19 +2,17 @@ const botao = document.getElementById("botaoAdicionar");
 const heroesList = document.getElementById("Heroes");
 const botaoListar = document.getElementById("botaoListar");
 
-
 botao.addEventListener("click", async () => {
   if (navigator.vibrate) {
     navigator.vibrate(1000);
   }
+
   const hero = {
     nome: document.getElementById("nomeHeroi").value,
     poder: document.getElementById("poderHeroi").value,
     raca: document.getElementById("racaHeroi").value,
     tipo: document.getElementById("tipoHeroi").value
   };
-
-
 
   await fetch("https://backendsuperhero.onrender.com/api/entries", {
     method: "POST",
@@ -27,10 +25,10 @@ botao.addEventListener("click", async () => {
   document.getElementById("racaHeroi").value = "";
   document.getElementById("tipoHeroi").value = "";
 });
- botaoListar.addEventListener("click", () => {
-  loadHeroes();
-});
 
+botaoListar.addEventListener("click", () => {
+  
+});
 
 async function loadHeroes() {
   const res = await fetch("https://backendsuperhero.onrender.com/api/entries");
@@ -39,7 +37,26 @@ async function loadHeroes() {
   heroesList.innerHTML = "";
   heroes.forEach(h => {
     const li = document.createElement("li");
-    li.textContent = `${h.nome} - ${h.poder} - ${h.raca} - ${h.tipo}`;
+
+    const nomeSpan = document.createElement("span");
+    nomeSpan.textContent = h.nome;
+
+    const poderSpan = document.createElement("span");
+    poderSpan.textContent = h.poder;
+
+    const racaSpan = document.createElement("span");
+    racaSpan.textContent = h.raca;
+
+    const tipoSpan = document.createElement("span");
+    tipoSpan.textContent = h.tipo;
+
+    li.appendChild(nomeSpan);
+    li.appendChild(document.createTextNode(" | "));
+    li.appendChild(poderSpan);
+    li.appendChild(document.createTextNode(" | "));
+    li.appendChild(racaSpan);
+    li.appendChild(document.createTextNode(" | "));
+    li.appendChild(tipoSpan);
 
     const deleteBtn = document.createElement("button");
     deleteBtn.textContent = "Delete";
@@ -78,5 +95,3 @@ async function loadHeroes() {
     heroesList.appendChild(li);
   });
 }
-
-loadHeroes();
