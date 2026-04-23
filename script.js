@@ -1,5 +1,7 @@
 const botao = document.getElementById("botaoAdicionar");
 const heroesList = document.getElementById("Heroes");
+const botaoListar = document.getElementById("botaoListar");
+
 
 botao.addEventListener("click", async () => {
   if (navigator.vibrate) {
@@ -12,13 +14,23 @@ botao.addEventListener("click", async () => {
     tipo: document.getElementById("tipoHeroi").value
   };
 
+
+
   await fetch("https://backendsuperhero.onrender.com/api/entries", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(hero)
   });
+
+  document.getElementById("nomeHeroi").value = "";
+  document.getElementById("poderHeroi").value = "";
+  document.getElementById("racaHeroi").value = "";
+  document.getElementById("tipoHeroi").value = "";
+});
+ botaoListar.addEventListener("click", () => {
   loadHeroes();
 });
+
 
 async function loadHeroes() {
   const res = await fetch("https://backendsuperhero.onrender.com/api/entries");
