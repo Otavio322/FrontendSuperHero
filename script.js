@@ -27,6 +27,10 @@ botao.addEventListener("click", async () => {
 });
 
 botaoListar.addEventListener("click", () => {
+  if (navigator.vibrate) {
+    navigator.vibrate(1000);
+  }
+  loadHeroes();
   
 });
 
