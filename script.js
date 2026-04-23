@@ -30,6 +30,16 @@ botaoListar.addEventListener("click", () => {
   if (navigator.vibrate) {
     navigator.vibrate(1000);
   }
+
+  if (listaVisivel) {
+    heroesList.innerHTML = "";
+    listaVisivel = false;
+    botaoListar.textContent = "Listar Heróis";
+    } else {
+    loadHeroes(); // carrega os heróis
+    listaVisivel = true;
+    botaoListar.textContent = "Fechar Lista";
+    }
   loadHeroes();
   
 });
