@@ -26,6 +26,8 @@ botao.addEventListener("click", async () => {
   document.getElementById("tipoHeroi").value = "";
 });
 
+let listaVisivel = false;
+
 botaoListar.addEventListener("click", () => {
   if (navigator.vibrate) {
     navigator.vibrate(1000);
