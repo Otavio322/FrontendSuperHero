@@ -28,6 +28,39 @@ async function loadHeroes() {
   heroes.forEach(h => {
     const li = document.createElement("li");
     li.textContent = `${h.nome} - ${h.poder} - ${h.raca} - ${h.tipo}`;
+
+    const deleteBtn = document.createElement("button");
+    deleteBtn.textContent = "Delete";
+    deleteBtn.onclick = async () => {
+      await fetch(`http://localhost:3000/heroes/${h._id}`, {
+        method: "DELETE"
+      });
+      loadHeroes();
+    };
+    const editBtn = document.createElement("button");
+    editBtn.textContent = "Editar";
+    editBtn.onclick = async () => {
+      const novoNome = prompt("Novo nome:", h.nome);
+      const novoPoder = prompt("Novo poder:", h.poder);
+      const novaRaca = prompt("Nova raça:", h.raca);
+      const novoTipo = prompt("Novo tipo:", h.tipo);
+
+      const updatedHero = {
+        nome: novoNome,
+        poder: novoPoder,
+        raca: novaRaca,
+        tipo: novoTipo
+      };
+
+      await fetch(`http://localhost:3000/heroes/${h._id}`, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(updatedHero)
+      });
+      loadHeroes();
+    };
+    li.appendChild(deleteBtn);
+    li.appendChild(editBtn);
     heroesList.appendChild(li);
   });
 }

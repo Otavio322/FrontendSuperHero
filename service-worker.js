@@ -1,4 +1,4 @@
-const CACHE_NAME = 'Super-Hero';
+const CACHE_NAME = 'Super-Hero-v1';
 const APP_FILES = [
   './',
   './index.html',
