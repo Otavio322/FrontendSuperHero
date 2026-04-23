@@ -3,16 +3,16 @@ const heroesList = document.getElementById("Heroes");
 
 botao.addEventListener("click", async () => {
   if (navigator.vibrate) {
-        navigator.vibrate(1000);
-    }
-    const hero = {
-    
+    navigator.vibrate(1000);
+  }
+  const hero = {
     nome: document.getElementById("nomeHeroi").value,
     poder: document.getElementById("poderHeroi").value,
     raca: document.getElementById("racaHeroi").value,
     tipo: document.getElementById("tipoHeroi").value
   };
-  await fetch("https://backendsuperhero.onrender.com", {
+
+  await fetch("https://backendsuperhero.onrender.com/api/entries", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(hero)
@@ -21,7 +21,7 @@ botao.addEventListener("click", async () => {
 });
 
 async function loadHeroes() {
-  const res = await fetch("https://backendsuperhero.onrender.com");
+  const res = await fetch("https://backendsuperhero.onrender.com/api/entries");
   const heroes = await res.json();
 
   heroesList.innerHTML = "";
@@ -32,11 +32,12 @@ async function loadHeroes() {
     const deleteBtn = document.createElement("button");
     deleteBtn.textContent = "Delete";
     deleteBtn.onclick = async () => {
-      await fetch(`https://backendsuperhero.onrender.com/${h._id}`, {
+      await fetch(`https://backendsuperhero.onrender.com/api/entries/${h._id}`, {
         method: "DELETE"
       });
       loadHeroes();
     };
+
     const editBtn = document.createElement("button");
     editBtn.textContent = "Editar";
     editBtn.onclick = async () => {
@@ -52,19 +53,14 @@ async function loadHeroes() {
         tipo: novoTipo
       };
 
-      const botaoListar = document.getElementById("botaoListar");
-
-      botaoListar.addEventListener("click", () => {
-     loadHeroes();
-     });  
-
-      await fetch(`https://backendsuperhero.onrender.com/${h._id}`, {
+      await fetch(`https://backendsuperhero.onrender.com/api/entries/${h._id}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(updatedHero)
       });
       loadHeroes();
     };
+
     li.appendChild(deleteBtn);
     li.appendChild(editBtn);
     heroesList.appendChild(li);
