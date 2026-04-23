@@ -52,6 +52,12 @@ async function loadHeroes() {
         tipo: novoTipo
       };
 
+      const botaoListar = document.getElementById("botaoListar");
+
+      botaoListar.addEventListener("click", () => {
+     loadHeroes();
+     });  
+
       await fetch(`http://localhost:3000/heroes/${h._id}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
