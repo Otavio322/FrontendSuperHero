@@ -34,11 +34,12 @@ botaoListar.addEventListener("click", () => {
   }
 
   if (listaVisivel) {
-    heroesList.innerHTML = "";
+    heroesList.innerHTML = "none";
     listaVisivel = false;
     botaoListar.textContent = "Listar Heróis";
     } else {
-    loadHeroes(); // carrega os heróis
+    loadHeroes();
+    heroesList.style.display = "block";
     listaVisivel = true;
     botaoListar.textContent = "Fechar Lista";
     }
