@@ -34,7 +34,7 @@ botaoListar.addEventListener("click", () => {
   }
 
   if (listaVisivel) {
-    heroesList.innerHTML = "none";
+    heroesList.style.display = "none";
     listaVisivel = false;
     botaoListar.textContent = "Listar Heróis";
     } else {
@@ -43,7 +43,7 @@ botaoListar.addEventListener("click", () => {
     listaVisivel = true;
     botaoListar.textContent = "Fechar Lista";
     }
-  loadHeroes();
+  
   
 });
 
